@@ -1,7 +1,7 @@
 // Configuración central: actualiza aquí el contacto y las fotos de la colección.
 window.NOVA_CONFIG = {
   brand: 'NOVA CHAINS',
-  whatsappNumber: '529985358154',
+  whatsappNumber: '529985358145',
   collectionImages: [
     { image: 'public/images/cadena-1.jpeg', alt: 'Cadena llevada al cuello' },
     { image: 'public/images/cadena-2.jpeg', alt: 'Composición de varias cadenas sobre fondo oscuro' },
