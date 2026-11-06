@@ -4,8 +4,8 @@
 
   const whatsapp = message => `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;
   const messages = {
-    general: `Hola, encontré ${config.brand} en su página web y me gustaría conocer las cadenas disponibles.`,
-    collection: `Hola, vi las cadenas de ${config.brand} en su página web. Me interesa una de las fotos; ¿me ayudas a identificar el modelo y confirmarme el precio y la disponibilidad?`,
+    general: `Hola, encontré ${config.brand} en su página web. Vi la oferta de cadenas a $${config.unitPrice} MXN cada una y me gustaría conocer cuáles están disponibles.`,
+    collection: `Hola, vi la colección de ${config.brand}. Me interesa una de las fotos y quiero aprovechar la oferta de $${config.unitPrice} MXN cada una. ¿Me confirmas si está disponible?`,
     project: config.developmentContactMessage
   };
 
@@ -19,12 +19,67 @@
   const gallery = document.querySelector('#collection-gallery');
   gallery.innerHTML = config.collectionImages.map((item, index) => `
     <figure class="collection-photo collection-photo-${index + 1}">
-      <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false">
-      <div class="collection-placeholder" hidden aria-hidden="true"><span>FOTO PRÓXIMAMENTE</span></div>
+      <button class="gallery-trigger" type="button" data-gallery-index="${index}" aria-label="Ampliar foto ${index + 1}: ${item.alt}">
+        <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false">
+        <span class="collection-placeholder" hidden aria-hidden="true">FOTO PRÓXIMAMENTE</span>
+        <span class="gallery-zoom" aria-hidden="true">↗</span>
+      </button>
     </figure>
   `).join('') + `
     <div class="gallery-note" aria-hidden="true"><span>NC&nbsp; / &nbsp;ESTILO PERSONAL</span><span class="gallery-note-mark">✳</span></div>
   `;
+
+  const viewer = document.querySelector('#gallery-viewer');
+  const viewerImage = viewer.querySelector('.viewer-image');
+  const viewerCount = viewer.querySelector('.viewer-count');
+  const thumbnails = viewer.querySelector('.viewer-thumbnails');
+  let currentPhoto = 0;
+  let lastTrigger = null;
+  const showPhoto = index => {
+    const length = config.collectionImages.length;
+    currentPhoto = (index + length) % length;
+    const photo = config.collectionImages[currentPhoto];
+    viewerImage.src = photo.image;
+    viewerImage.alt = photo.alt;
+    viewerCount.textContent = `${String(currentPhoto + 1).padStart(2, '0')} / ${String(length).padStart(2, '0')} · ${photo.alt}`;
+    thumbnails.querySelectorAll('button').forEach((button, i) => {
+      button.setAttribute('aria-current', String(i === currentPhoto));
+    });
+  };
+  thumbnails.innerHTML = config.collectionImages.map((photo, index) => `
+    <button type="button" aria-label="Ver foto ${index + 1}: ${photo.alt}" aria-current="false" data-photo-index="${index}"><img src="${photo.image}" alt="" loading="lazy"></button>
+  `).join('');
+  gallery.addEventListener('click', event => {
+    const trigger = event.target.closest('.gallery-trigger');
+    if (!trigger) return;
+    lastTrigger = trigger;
+    showPhoto(Number(trigger.dataset.galleryIndex));
+    viewer.showModal();
+    viewer.querySelector('.viewer-close').focus();
+  });
+  viewer.querySelector('.viewer-close').addEventListener('click', () => viewer.close());
+  viewer.querySelector('.viewer-prev').addEventListener('click', () => showPhoto(currentPhoto - 1));
+  viewer.querySelector('.viewer-next').addEventListener('click', () => showPhoto(currentPhoto + 1));
+  thumbnails.addEventListener('click', event => {
+    const button = event.target.closest('[data-photo-index]');
+    if (button) showPhoto(Number(button.dataset.photoIndex));
+  });
+  viewer.addEventListener('close', () => lastTrigger?.focus());
+  viewer.addEventListener('click', event => {
+    if (event.target === viewer) viewer.close();
+  });
+  viewer.addEventListener('keydown', event => {
+    if (event.key === 'ArrowLeft') showPhoto(currentPhoto - 1);
+    if (event.key === 'ArrowRight') showPhoto(currentPhoto + 1);
+  });
+  let touchStartX = null;
+  viewer.addEventListener('touchstart', event => { touchStartX = event.changedTouches[0].screenX; }, { passive: true });
+  viewer.addEventListener('touchend', event => {
+    if (touchStartX === null) return;
+    const delta = event.changedTouches[0].screenX - touchStartX;
+    if (Math.abs(delta) > 45) showPhoto(currentPhoto + (delta < 0 ? 1 : -1));
+    touchStartX = null;
+  }, { passive: true });
 
   const serviceIcons = {
     web: '<rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M7 6.5h.01M10 6.5h.01M8 13h8M8 16h5"/>',
@@ -58,4 +113,42 @@
     menuToggle.setAttribute('aria-expanded', 'false');
     menuToggle.setAttribute('aria-label', 'Abrir menú');
   });
+
+  document.addEventListener('click', event => {
+    if (menuToggle.getAttribute('aria-expanded') === 'true' && !event.target.closest('.site-header')) {
+      nav.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menú');
+    }
+  });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && menuToggle.getAttribute('aria-expanded') === 'true') {
+      nav.classList.remove('is-open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+      menuToggle.setAttribute('aria-label', 'Abrir menú');
+      menuToggle.focus();
+    }
+  });
+
+  const floatingContact = document.querySelector('.floating-contact');
+  const revealContact = () => floatingContact.classList.toggle('is-visible', window.scrollY > 520);
+  window.addEventListener('scroll', revealContact, { passive: true });
+  revealContact();
+
+  const revealItems = document.querySelectorAll('.collection-photo, .manifesto-copy, .service-card, .faq-list details');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    revealItems.forEach(item => item.classList.add('will-reveal'));
+    const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-revealed');
+        revealObserver.unobserve(entry.target);
+      }
+    }), { threshold: 0.12 });
+    revealItems.forEach(item => revealObserver.observe(item));
+  }
+
+  document.querySelectorAll('.faq details').forEach(detail => detail.addEventListener('toggle', () => {
+    if (!detail.open) return;
+    document.querySelectorAll('.faq details').forEach(other => { if (other !== detail) other.open = false; });
+  }));
 })();

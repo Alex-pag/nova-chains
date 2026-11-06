@@ -8,7 +8,7 @@ Abre `index.html` en un navegador. Para servirla desde un servidor local, ejecut
 
 ## Personalización
 
-- Número de WhatsApp y fotografías de la colección: `config.js`.
+- Número de WhatsApp, precio por cadena y fotografías de la colección: `config.js`.
 - Estilos, colores y diseño adaptable: `styles.css`, en particular las variables al inicio.
 - Las fotos actuales están en `public/images/cadena-1.jpeg`, `cadena-2.jpeg` y `cadena-3.jpeg`. Para añadir o cambiar fotos, actualiza el arreglo `collectionImages` en `config.js`; una imagen faltante mostrará un marcador.
 
