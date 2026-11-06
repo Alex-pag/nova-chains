@@ -3,10 +3,22 @@ window.NOVA_CONFIG = {
   brand: 'NOVA CHAINS',
   whatsappNumber: '529983072856',
   unitPrice: 50,
+  referencePrice: 149,
+  giftAtQuantity: 3,
   collectionImages: [
-    { image: 'public/images/cadena-1.jpeg', alt: 'Cadena llevada al cuello' },
-    { image: 'public/images/cadena-2.jpeg', alt: 'Composición de varias cadenas sobre fondo oscuro' },
-    { image: 'public/images/cadena-3.jpeg', alt: 'Composición de cadenas y dije sobre fondo oscuro' }
+    { image: 'public/images/cadena-01.jpeg', name: 'Eslabones mixtos', alt: 'Cadena plateada de eslabones ovalados sobre fondo negro' },
+    { image: 'public/images/cadena-02.jpeg', name: 'Eslabón fino', alt: 'Cadena plateada fina de eslabones pequeños sobre fondo negro' },
+    { image: 'public/images/cadena-03.jpeg', name: 'Serpiente', alt: 'Cadena plateada lisa tipo serpiente sobre fondo negro' },
+    { image: 'public/images/cadena-04.jpeg', name: 'Torzal', alt: 'Cadena plateada de eslabones retorcidos tipo torzal sobre fondo negro' },
+    { image: 'public/images/cadena-05.jpeg', name: 'Trenzada', alt: 'Cadena plateada trenzada sobre fondo negro' },
+    { image: 'public/images/cadena-06.jpeg', name: 'Placas', alt: 'Cadena plateada formada por placas alargadas sobre fondo negro' },
+    { image: 'public/images/cadena-07.jpeg', name: 'Delicada', alt: 'Cadena plateada delgada de eslabones pequeños sobre fondo negro' },
+    { image: 'public/images/cadena-08.jpeg', name: 'Cubana', alt: 'Cadena plateada de eslabones estilo cubano sobre fondo negro' },
+    { image: 'public/images/cadena-09.jpeg', name: 'Veneciana', alt: 'Cadena plateada de eslabones cuadrados estilo veneciano sobre fondo negro' }
+  ],
+  giftImage: 'public/images/regalo-cruz.jpeg',
+  customerPhotos: [
+    { image: 'public/images/clientes/cliente-01.jpeg', alt: 'Cliente de NOVA CHAINS usando una cadena plateada', caption: 'Una cadena, tu propio estilo.' }
   ],
   developmentContactMessage: 'Hola, vi tu página web de NOVA CHAINS y me interesa desarrollar un proyecto contigo. Mi idea es: ',
   developerProfile: {

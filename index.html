@@ -19,7 +19,7 @@
     <a class="brand" href="#inicio" aria-label="NOVA CHAINS, inicio">NOVA<span>CHAINS</span><i aria-hidden="true">®</i></a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Abrir menú"><span></span><span></span></button>
     <nav class="nav" id="site-nav" aria-label="Navegación principal">
-      <a href="#inicio">Inicio</a><a href="#coleccion">Colección</a><a href="#nosotros">Sobre nosotros</a><a href="#faq">Preguntas frecuentes</a>
+      <a href="#inicio">Inicio</a><a href="#coleccion">Colección</a><a href="#clientes">Clientes</a><a href="#nosotros">Sobre nosotros</a><a href="#faq">Preguntas frecuentes</a>
       <a class="nav-cta js-whatsapp" data-message="general" href="#">Pedir ahora <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -41,16 +41,30 @@
     </section>
 
     <section class="collection section-pad" id="coleccion">
-      <div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> SELECCIÓN NOVA</p><h2>Cadenas<span class="period">.</span></h2></div><p class="section-intro">Un detalle que va contigo.<br><span>Antes $149 MXN · Hoy $50 MXN · Ahorras 66.4%.</span></p></div>
-      <div class="collection-gallery" id="collection-gallery" aria-label="Cadenas NOVA CHAINS"></div>
-      <div class="collection-contact"><p>¿Cuál va contigo?</p><a class="button button-dark js-whatsapp" data-message="collection" href="#">Elegir mi cadena por WhatsApp <span aria-hidden="true">↗</span></a></div>
+      <div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> SELECCIÓN NOVA</p><h2>Elige tu cadena<span class="period">.</span></h2></div><p class="section-intro">Toca “Agregar a mi selección” en tus favoritas.<br><span>Antes $149 MXN · Hoy $50 MXN · Ahorras 66.4%.</span></p></div>
+      <div class="chain-grid" id="chain-grid" aria-label="Elige entre nueve cadenas NOVA CHAINS"></div>
+      <aside class="gift-promo" aria-labelledby="gift-title">
+        <div class="gift-copy"><p class="eyebrow"><span class="eyebrow-line"></span> UN DETALLE EXTRA PARA TI</p><h3 id="gift-title">AL COMPRAR 3<br>TE REGALAMOS:</h3><p>Un dije de cruz para una de tus cadenas.</p><span class="gift-tag">TU REGALO NOVA</span></div>
+        <img id="gift-image" src="public/images/regalo-cruz.jpeg" alt="Dije plateado de cruz, el regalo al comprar tres cadenas" loading="lazy">
+      </aside>
+      <div class="selection-panel" aria-live="polite">
+        <div class="selection-summary"><span class="selection-label">TU SELECCIÓN</span><strong id="selection-count">0 cadenas seleccionadas</strong><p id="selection-total">Total: $0 MXN</p><p id="selection-message">Elige 3 cadenas para llevarte el dije de cruz de regalo.</p></div>
+        <a class="button button-dark is-disabled" id="send-selection" aria-disabled="true" href="#">Continuar por WhatsApp <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
+    <section class="customers section-pad" id="clientes" aria-labelledby="customers-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> NOVA EN LA VIDA REAL</p><h2 id="customers-title">Ustedes también<br>son parte de NOVA<span class="period">.</span></h2></div><p class="section-intro">Gracias a quienes ya llevan una cadena NOVA.<br><span>Pronto veremos más de sus estilos por aquí.</span></p></div>
+      <div class="customer-gallery" id="customer-gallery" aria-label="Fotos de clientes con sus cadenas"></div>
+      <div class="customer-invite"><p>¿Ya tienes la tuya?</p><span>Comparte una foto usando tu cadena y aparece en nuestra galería.</span><a class="button button-dark js-whatsapp" data-message="customer-photo" href="#">Enviar mi foto por WhatsApp <span aria-hidden="true">↗</span></a></div>
     </section>
 
     <section class="manifesto" id="nosotros"><div class="manifesto-mark" aria-hidden="true">N<span>✳</span>C</div><div class="manifesto-copy"><p class="eyebrow"><span class="eyebrow-line"></span> UN POCO SOBRE NOSOTROS</p><h2>El detalle que<br>lo cambia <em>todo.</em></h2><p>NOVA CHAINS nació de una idea sencilla: una cadena puede completar tu estilo y hacer que se sienta más tuyo. Después de la buena respuesta al vender nuestras primeras cadenas en una preparatoria, decidimos dar el siguiente paso y crear este espacio para compartirlas contigo.</p><a class="text-link" href="#coleccion">Conoce la colección <span aria-hidden="true">↗</span></a></div><div class="manifesto-side">ESTILO PERSONAL<br>DESDE EL PRIMER DÍA.<span>NC / 01</span></div></section>
 
     <section class="faq section-pad" id="faq"><div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> ¿TE AYUDAMOS?</p><h2>Preguntas frecuentes<span class="period">.</span></h2></div><p class="section-intro">Lo que necesitas saber antes de elegir<br><span>tu próxima cadena.</span></p></div><div class="faq-list">
-      <details><summary>¿Cómo puedo realizar un pedido?<span aria-hidden="true">+</span></summary><p>Elige una cadena y toca “Pedir por WhatsApp”. Se abrirá una conversación con el mensaje listo para enviar. Tu pedido inicia cuando nos escribes por WhatsApp.</p></details>
+      <details><summary>¿Cómo puedo realizar un pedido?<span aria-hidden="true">+</span></summary><p>Agrega tus cadenas favoritas a la selección y toca “Continuar por WhatsApp”. Se abrirá una conversación con los modelos elegidos.</p></details>
       <details><summary>¿Cuál es el precio de las cadenas?<span aria-hidden="true">+</span></summary><p>Tenemos una oferta especial: cada cadena cuesta $50 MXN. Escríbenos por WhatsApp para confirmar disponibilidad.</p></details>
+      <details><summary>¿Hay algún regalo al comprar varias cadenas?<span aria-hidden="true">+</span></summary><p>Sí. Al comprar 3 cadenas te regalamos un dije de cruz para una de ellas. Agrégalas a tu selección y continúa por WhatsApp.</p></details>
       <details><summary>¿Qué métodos de entrega están disponibles?<span aria-hidden="true">+</span></summary><p>Los detalles de entrega se confirman directamente por WhatsApp al realizar tu pedido.</p></details>
       <details><summary>¿Cómo puedo conocer los materiales de una cadena?<span aria-hidden="true">+</span></summary><p>Pregúntanos por WhatsApp sobre la cadena que te interesa y te compartiremos la información disponible.</p></details>
       <details><summary>¿Cómo puedo contactar con NOVA CHAINS?<span aria-hidden="true">+</span></summary><p>Puedes contactarnos desde cualquiera de los botones de WhatsApp de esta página.</p></details>
@@ -81,6 +95,6 @@
     <button class="viewer-arrow viewer-next" type="button" aria-label="Foto siguiente">›</button>
     <div class="viewer-thumbnails" aria-label="Elegir fotografía"></div>
   </dialog>
-  <footer class="site-footer"><a class="brand" href="#inicio">NOVA<span>CHAINS</span><i aria-hidden="true">®</i></a><span class="footer-note">Oferta: $50 MXN cada cadena. Disponibilidad y entrega se confirman por WhatsApp.</span><div class="footer-links"><a href="#coleccion">Colección</a><a href="#nosotros">Nosotros</a><a href="#faq">Preguntas</a><a class="js-whatsapp" data-message="general" href="#">WhatsApp ↗</a></div><span class="copyright">© <span id="year"></span> NOVA CHAINS</span></footer>
+  <footer class="site-footer"><a class="brand" href="#inicio">NOVA<span>CHAINS</span><i aria-hidden="true">®</i></a><span class="footer-note">Oferta: $50 MXN cada cadena. Disponibilidad y entrega se confirman por WhatsApp.</span><div class="footer-links"><a href="#coleccion">Colección</a><a href="#clientes">Clientes</a><a href="#nosotros">Nosotros</a><a href="#faq">Preguntas</a><a class="js-whatsapp" data-message="general" href="#">WhatsApp ↗</a></div><span class="copyright">© <span id="year"></span> NOVA CHAINS</span></footer>
 </body>
 </html>

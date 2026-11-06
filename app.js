@@ -4,8 +4,9 @@
 
   const whatsapp = message => `https://wa.me/${config.whatsappNumber}?text=${encodeURIComponent(message)}`;
   const messages = {
-    general: `Hola, encontré ${config.brand} en su página web. Vi la oferta de cadenas a $${config.unitPrice} MXN cada una y me gustaría conocer cuáles están disponibles.`,
-    collection: `Hola, vi la colección de ${config.brand}. Me interesa una de las fotos y quiero aprovechar la oferta de $${config.unitPrice} MXN cada una. ¿Me confirmas si está disponible?`,
+    general: 'Hola, quisiera saber si me podría vender alguna cadena, cuáles quedan?',
+    collection: 'Hola, quisiera saber si me podría vender alguna cadena, cuáles quedan?',
+    'customer-photo': 'Hola, ya tengo una cadena de NOVA CHAINS y me gustaría compartir una foto para su galería de clientes.',
     project: config.developmentContactMessage
   };
 
@@ -16,18 +17,70 @@
     link.rel = 'noopener noreferrer';
   });
 
-  const gallery = document.querySelector('#collection-gallery');
-  gallery.innerHTML = config.collectionImages.map((item, index) => `
-    <figure class="collection-photo collection-photo-${index + 1}">
-      <button class="gallery-trigger" type="button" data-gallery-index="${index}" aria-label="Ampliar foto ${index + 1}: ${item.alt}">
-        <img src="${item.image}" alt="${item.alt}" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false">
-        <span class="collection-placeholder" hidden aria-hidden="true">FOTO PRÓXIMAMENTE</span>
-        <span class="gallery-zoom" aria-hidden="true">↗</span>
-      </button>
+  const customerGallery = document.querySelector('#customer-gallery');
+  customerGallery.innerHTML = (config.customerPhotos || []).map((photo, index) => `
+    <figure class="customer-photo">
+      <div class="customer-photo-frame"><img src="${photo.image}" alt="${photo.alt}" loading="lazy"><span>CLIENTE NOVA · ${String(index + 1).padStart(2, '0')}</span></div>
+      <figcaption>${photo.caption}</figcaption>
     </figure>
-  `).join('') + `
-    <div class="gallery-note" aria-hidden="true"><span>NC&nbsp; / &nbsp;ESTILO PERSONAL</span><span class="gallery-note-mark">✳</span></div>
-  `;
+  `).join('');
+
+  const gallery = document.querySelector('#chain-grid');
+  document.querySelector('#gift-image').src = config.giftImage;
+  gallery.innerHTML = config.collectionImages.map((item, index) => `
+    <article class="chain-card" data-chain-index="${index}">
+      <div class="chain-card-photo">
+        <button class="gallery-trigger" type="button" data-gallery-index="${index}" aria-label="Ampliar ${item.name}">
+          <img src="${item.image}" alt="${item.alt}" loading="lazy">
+          <span class="chain-card-number">${String(index + 1).padStart(2, '0')}</span>
+          <span class="gallery-zoom" aria-hidden="true">↗</span>
+        </button>
+      </div>
+      <div class="chain-card-info">
+        <div><p class="chain-card-label">NOVA · ${String(index + 1).padStart(2, '0')}</p><h3>${item.name}</h3></div>
+        <p class="chain-card-price"><del>$${config.referencePrice}</del><strong>$${config.unitPrice}</strong><span>MXN</span></p>
+      </div>
+      <button class="chain-select" type="button" data-select-index="${index}" aria-pressed="false">+ Agregar a mi selección</button>
+    </article>
+  `).join('');
+
+  const selectedChains = new Set();
+  const selectionCount = document.querySelector('#selection-count');
+  const selectionTotal = document.querySelector('#selection-total');
+  const selectionMessage = document.querySelector('#selection-message');
+  const sendSelection = document.querySelector('#send-selection');
+  const updateSelection = () => {
+    const count = selectedChains.size;
+    const selectedNames = [...selectedChains].sort((a, b) => a - b).map(index => `Cadena ${String(index + 1).padStart(2, '0')} (${config.collectionImages[index].name})`);
+    selectionCount.textContent = count === 1 ? '1 cadena seleccionada' : `${count} cadenas seleccionadas`;
+    selectionTotal.textContent = `Total: $${count * config.unitPrice} MXN`;
+    const qualifiesForGift = count >= config.giftAtQuantity;
+    selectionMessage.textContent = qualifiesForGift
+      ? '¡Listo! Tu selección incluye el dije de cruz de regalo.'
+      : `Elige ${config.giftAtQuantity - count} más para llevarte el dije de cruz de regalo.`;
+    sendSelection.setAttribute('aria-disabled', String(count === 0));
+    sendSelection.classList.toggle('is-disabled', count === 0);
+    const giftLine = qualifiesForGift ? ' Quiero aprovechar la promoción de compra 3 y recibir el dije de cruz de regalo.' : '';
+    const message = `Hola, quisiera pedir estas cadenas: ${selectedNames.join(', ')}. El precio es $${config.unitPrice} MXN cada una.${giftLine} ¿Me confirmas si están disponibles?`;
+    sendSelection.href = count ? whatsapp(message) : '#';
+  };
+  gallery.addEventListener('click', event => {
+    const selectButton = event.target.closest('[data-select-index]');
+    if (!selectButton) return;
+    const index = Number(selectButton.dataset.selectIndex);
+    if (selectedChains.has(index)) selectedChains.delete(index);
+    else selectedChains.add(index);
+    const selected = selectedChains.has(index);
+    selectButton.setAttribute('aria-pressed', String(selected));
+    selectButton.textContent = selected ? '✓ Agregada · Quitar' : '+ Agregar a mi selección';
+    selectButton.closest('.chain-card').classList.toggle('is-selected', selected);
+    updateSelection();
+  });
+  sendSelection.addEventListener('click', event => {
+    if (selectedChains.size) return;
+    event.preventDefault();
+  });
+  updateSelection();
 
   const viewer = document.querySelector('#gallery-viewer');
   const viewerImage = viewer.querySelector('.viewer-image');
@@ -135,7 +188,7 @@
   window.addEventListener('scroll', revealContact, { passive: true });
   revealContact();
 
-  const revealItems = document.querySelectorAll('.collection-photo, .manifesto-copy, .service-card, .faq-list details');
+  const revealItems = document.querySelectorAll('.chain-card, .gift-promo, .customer-photo, .customer-invite, .manifesto-copy, .service-card, .faq-list details');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealItems.forEach(item => item.classList.add('will-reveal'));
     const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {

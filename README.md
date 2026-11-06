@@ -8,9 +8,10 @@ Abre `index.html` en un navegador. Para servirla desde un servidor local, ejecut
 
 ## Personalización
 
-- Número de WhatsApp, precio por cadena y fotografías de la colección: `config.js`.
+- Número de WhatsApp, precio, promoción del dije de cruz y fotografías de las cadenas: `config.js`.
 - Estilos, colores y diseño adaptable: `styles.css`, en particular las variables al inicio.
-- Las fotos actuales están en `public/images/cadena-1.jpeg`, `cadena-2.jpeg` y `cadena-3.jpeg`. Para añadir o cambiar fotos, actualiza el arreglo `collectionImages` en `config.js`; una imagen faltante mostrará un marcador.
+- Las nueve fotos de cadenas y la foto del dije de cruz están en `public/images`. Para añadir o cambiar modelos, actualiza el arreglo `collectionImages` en `config.js`; la imagen del regalo se configura en `giftImage`.
+- La galería de clientes usa `public/images/clientes` y el arreglo `customerPhotos` de `config.js`. Para agregar una foto, copia su archivo a esa carpeta y agrega un elemento con `image`, `alt` y `caption` al arreglo; sube el archivo y los cambios de configuración al repositorio.
 
 ## Sección de desarrollo
 
