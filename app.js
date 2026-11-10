@@ -6,6 +6,7 @@
   const messages = {
     general: 'Hola, quisiera saber si me podría vender alguna cadena, cuáles quedan?',
     collection: 'Hola, quisiera saber si me podría vender alguna cadena, cuáles quedan?',
+    perfume: 'Hola, me interesa el perfume Le Beau de $160 MXN. ¿Está disponible?',
     'customer-photo': 'Hola, ya tengo una cadena de NOVA CHAINS y me gustaría compartir una foto para su galería de clientes.',
     project: config.developmentContactMessage
   };
@@ -25,6 +26,14 @@
     </figure>
   `).join('');
 
+  const perfumeGrid = document.querySelector('#perfume-grid');
+  perfumeGrid.innerHTML = (config.perfumes || []).map((perfume, index) => `
+    <article class="perfume-card">
+      <div class="perfume-image"><img src="${perfume.image}" alt="${perfume.alt}" loading="lazy"><span class="perfume-index">NOVA · FRAGANCIA 0${index + 1}</span><span class="perfume-edition">NUEVO ARTÍCULO<br>DE TEMPORADA</span></div>
+      <div class="perfume-info"><div><p class="perfume-kicker">DECANT DE PERFUME · 5 ML</p><h3>${perfume.name}</h3><p class="perfume-description">${perfume.description}</p></div><p class="perfume-price"><strong>$${perfume.price}</strong><span>MXN</span></p></div>
+      <a class="button button-dark perfume-order" href="${whatsapp(`Hola, me interesa el decant de perfume ${perfume.name} de 5 ml, artículo nuevo de temporada, a $${perfume.price} MXN. ¿Está disponible?`)}" target="_blank" rel="noopener noreferrer">Pedir por WhatsApp <span aria-hidden="true">↗</span></a>
+    </article>
+  `).join('');
   const gallery = document.querySelector('#chain-grid');
   document.querySelector('#gift-image').src = config.giftImage;
   gallery.innerHTML = config.collectionImages.map((item, index) => `
@@ -188,7 +197,7 @@
   window.addEventListener('scroll', revealContact, { passive: true });
   revealContact();
 
-  const revealItems = document.querySelectorAll('.chain-card, .gift-promo, .customer-photo, .customer-invite, .manifesto-copy, .service-card, .faq-list details');
+  const revealItems = document.querySelectorAll('.chain-card, .gift-promo, .perfume-card, .customer-photo, .customer-invite, .manifesto-copy, .service-card, .faq-list details');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealItems.forEach(item => item.classList.add('will-reveal'));
     const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {
