@@ -16,9 +16,16 @@ window.NOVA_CONFIG = {
     { image: 'public/images/cadena-08.jpeg', name: 'Cubana', alt: 'Cadena plateada de eslabones estilo cubano sobre fondo negro' },
     { image: 'public/images/cadena-09.jpeg', name: 'Veneciana', alt: 'Cadena plateada de eslabones cuadrados estilo veneciano sobre fondo negro' }
   ],
+  bracelets: [
+    { image: 'public/images/pulseras/pulsera-01.jpeg', name: 'Torzal', price: 30, alt: 'Pulsera plateada de cadena tipo torzal sobre fondo negro' },
+    { image: 'public/images/pulseras/pulsera-02.jpeg', name: 'Cubana', price: 30, alt: 'Pulsera plateada de eslabones planos estilo cubano sobre fondo negro' },
+    { image: 'public/images/pulseras/pulsera-03.jpeg', name: 'Eslabones clásicos', price: 30, alt: 'Pulsera plateada de eslabones redondos sobre fondo negro' },
+    { image: 'public/images/pulseras/pulsera-04.jpeg', name: 'Brillante dorada', price: 30, referencePrice: 50, alt: 'Pulsera dorada con piedras brillantes sobre fondo negro' }
+  ],
   perfumes: [
     { image: 'public/images/perfume-lebeau.png', name: 'Le Beau', description: 'Perfume Le Beau en formato decant de 5 ml: una dosis práctica de tu nueva esencia favorita.', price: 160, alt: 'Atomizador turquesa LeBeau frente a un frasco de perfume' }
   ],
+  goldCrossOffer: { image: 'public/images/cadena-dorada-cruz.png', name: 'Cadena dorada con dije de cruz', price: 75, alt: 'Cadena dorada con dije de crucifijo INRI sobre fondo negro' },
   giftImage: 'public/images/regalo-cruz.jpeg',
   customerPhotos: [
     { image: 'public/images/clientes/cliente-01.jpeg', alt: 'Cliente de NOVA CHAINS usando una cadena plateada', caption: 'Una cadena, tu propio estilo.' },

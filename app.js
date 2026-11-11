@@ -26,6 +26,26 @@
     </figure>
   `).join('');
 
+  const braceletGrid = document.querySelector('#bracelet-grid');
+  braceletGrid.innerHTML = (config.bracelets || []).map((bracelet, index) => `
+    <article class="bracelet-card">
+      <div class="bracelet-image">
+        <div class="bracelet-image-placeholder" aria-hidden="true"><span>NC</span><small>PULSERA NOVA · 0${index + 1}</small></div>
+        <img src="${bracelet.image}" alt="${bracelet.alt}" loading="lazy">
+        ${bracelet.referencePrice ? '<span class="bracelet-offer-badge">OFERTA</span>' : ''}<span class="bracelet-number">0${index + 1}</span>
+      </div>
+      <div class="bracelet-info"><div><p class="bracelet-kicker">${bracelet.referencePrice ? 'OFERTA NOVA · PRECIO ESPECIAL' : 'COLECCIÓN NOVA'}</p><h3>${bracelet.name}</h3><p class="bracelet-price">${bracelet.referencePrice ? `<del>$${bracelet.referencePrice}</del>` : ''}<strong>$${bracelet.price}</strong> <span>MXN</span></p></div><a class="bracelet-order" href="${whatsapp(`Hola, quiero comprar la pulsera ${bracelet.name} de NOVA CHAINS${bracelet.referencePrice ? ` en oferta, antes $${bracelet.referencePrice} y ahora $${bracelet.price}` : ` por $${bracelet.price}`} MXN. ¿Está disponible?`)}" target="_blank" rel="noopener noreferrer" aria-label="Comprar por WhatsApp la pulsera ${bracelet.name} por $${bracelet.price} MXN">Comprar <span aria-hidden="true">↗</span></a></div>
+    </article>
+  `).join('');
+  braceletGrid.querySelectorAll('.bracelet-image img').forEach(image => {
+    const showImage = () => {
+      image.previousElementSibling.hidden = true;
+      image.classList.add('is-loaded');
+    };
+    image.addEventListener('load', showImage, { once: true });
+    image.addEventListener('error', () => { image.hidden = true; }, { once: true });
+    if (image.complete && image.naturalWidth > 0) showImage();
+  });
   const perfumeGrid = document.querySelector('#perfume-grid');
   perfumeGrid.innerHTML = (config.perfumes || []).map((perfume, index) => `
     <article class="perfume-card">
@@ -36,6 +56,11 @@
   `).join('');
   const gallery = document.querySelector('#chain-grid');
   document.querySelector('#gift-image').src = config.giftImage;
+  const goldCrossOffer = config.goldCrossOffer;
+  const goldCrossImage = document.querySelector('#gold-cross-image');
+  goldCrossImage.src = goldCrossOffer.image;
+  goldCrossImage.alt = goldCrossOffer.alt;
+  document.querySelector('#gold-cross-order').href = whatsapp(`Hola, me interesa la oferta NOVA: ${goldCrossOffer.name} por $${goldCrossOffer.price} MXN. ¿Está disponible?`);
   gallery.innerHTML = config.collectionImages.map((item, index) => `
     <article class="chain-card" data-chain-index="${index}">
       <div class="chain-card-photo">
@@ -197,7 +222,7 @@
   window.addEventListener('scroll', revealContact, { passive: true });
   revealContact();
 
-  const revealItems = document.querySelectorAll('.chain-card, .gift-promo, .perfume-card, .customer-photo, .customer-invite, .manifesto-copy, .service-card, .faq-list details');
+  const revealItems = document.querySelectorAll('.chain-card, .gift-promo, .gold-cross-offer, .bracelet-card, .perfume-card, .customer-photo, .customer-invite, .manifesto-copy, .service-card, .faq-list details');
   if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     revealItems.forEach(item => item.classList.add('will-reveal'));
     const revealObserver = new IntersectionObserver(entries => entries.forEach(entry => {

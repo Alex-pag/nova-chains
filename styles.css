@@ -208,3 +208,49 @@
 .perfume-order{align-self:start;justify-self:start;margin-top:20px;min-width:220px;justify-content:space-between;background:#173f3d;border-color:#173f3d}
 .perfume-order:hover{background:#245a56}
 @media(max-width:650px){.perfumes{padding-top:68px;padding-bottom:68px}.perfume-card{grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto;padding:12px}.perfume-image{grid-row:auto;min-height:0;aspect-ratio:4/5}.perfume-image img{min-height:0}.perfume-info{padding:20px 2px 17px;align-items:flex-end}.perfume-info h3{font-size:39px}.perfume-description{font-size:11px;max-width:210px}.perfume-price strong{font-size:28px}.perfume-order{width:100%;margin-top:14px;min-width:0}}
+/* Oferta destacada: cadena dorada con cruz */
+.gold-cross-offer{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);align-items:stretch;gap:clamp(24px,5vw,66px);margin:0 0 44px;padding:clamp(18px,3vw,34px);background:radial-gradient(ellipse at 78% 15%,#342a18,#181815 62%);color:#f1eee7;overflow:hidden}
+.gold-cross-image{position:relative;min-height:390px;background:#090a09;overflow:hidden}
+.gold-cross-image img{display:block;width:100%;height:100%;min-height:390px;object-fit:cover;transition:transform .7s ease}
+.gold-cross-offer:hover .gold-cross-image img{transform:scale(1.025)}
+.gold-cross-image>span{position:absolute;left:14px;top:14px;padding:9px 11px;background:rgba(13,13,12,.76);color:#e1c78f;font-size:8px;letter-spacing:.16em}
+.gold-cross-copy{align-self:center;padding:20px 4% 20px 0}
+.gold-cross-copy .eyebrow{margin-bottom:17px;color:#d0b77d}
+.gold-cross-copy .eyebrow-line{background:#d0b77d}
+.gold-cross-label{margin:0 0 14px;color:#d0b77d;font-size:8px;font-weight:700;letter-spacing:.17em}
+.gold-cross-copy h3{margin:0;color:#f6f2e8;font:500 clamp(34px,4.5vw,58px)/1.02 var(--display);letter-spacing:-.055em}
+.gold-cross-description{max-width:340px;margin:17px 0 20px;color:#c4c0b5;font-size:12px;line-height:1.75}
+.gold-cross-price{display:flex;align-items:baseline;gap:9px;margin:0 0 20px;color:#e2c891}
+.gold-cross-price strong{font:800 clamp(38px,5vw,58px)/1 var(--display);letter-spacing:-.06em}
+.gold-cross-price span{font-size:9px;letter-spacing:.17em}
+.gold-cross-order{min-height:48px;background:#d0b77d;border-color:#d0b77d;color:#171612;justify-content:space-between}
+.gold-cross-order:hover{background:#e4d2a8}
+@media(max-width:650px){.gold-cross-offer{grid-template-columns:1fr;gap:16px;margin-bottom:34px;padding:12px}.gold-cross-image{min-height:0;aspect-ratio:4/5}.gold-cross-image img{min-height:0}.gold-cross-copy{padding:15px 8px 8px}.gold-cross-copy h3{font-size:40px}.gold-cross-description{font-size:11px;margin:12px 0 16px}.gold-cross-order{width:100%;font-size:9px}}
+/* Pulseras */
+.bracelets{background:#181816;color:#f1f0eb}
+.bracelets .section-heading h2{color:#f1f0eb}
+.bracelets .section-heading .eyebrow{color:#c8b491}
+.bracelets .section-heading .eyebrow-line{background:#c8b491}
+.bracelets .section-intro{color:#d3d0c8}
+.bracelets .section-intro span{color:#a9a69d}
+.bracelets .period{color:#c6a878}
+.bracelet-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(13px,2vw,24px)}
+.bracelet-card{min-width:0}
+.bracelet-image{position:relative;aspect-ratio:4/5;overflow:hidden;background:#0b0b0a;border:1px solid #36352f}
+.bracelet-image img{position:absolute;inset:0;z-index:1;display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.bracelet-card:hover .bracelet-image img{transform:scale(1.035)}
+.bracelet-image-placeholder{position:absolute;inset:0;display:grid;place-items:center;background:radial-gradient(ellipse at center,#22221f 0,#11110f 60%,#090909 100%);color:#cbc4b4}
+.bracelet-image-placeholder::before{content:"";position:absolute;width:60%;aspect-ratio:1;border:1px solid rgba(211,195,160,.3);border-radius:50%;box-shadow:0 0 0 22px rgba(211,195,160,.035),0 0 0 50px rgba(211,195,160,.025)}
+.bracelet-image-placeholder>span{position:relative;font:300 clamp(54px,8vw,100px)/1 var(--display);letter-spacing:-.15em}
+.bracelet-image-placeholder small{position:absolute;bottom:17px;font-size:7px;letter-spacing:.18em;color:#918a7e}
+.bracelet-number{position:absolute;z-index:2;top:13px;left:13px;padding:7px 9px;background:rgba(14,14,13,.78);color:#e0cba8;font-size:8px;letter-spacing:.13em}
+.bracelet-info{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:16px 1px 13px;border-bottom:1px solid #3b3932}
+.bracelet-kicker{margin:0 0 7px;color:#c6b18e;font-size:7px;letter-spacing:.16em}
+.bracelet-info h3{margin:0;color:#f2f0e9;font:500 clamp(15px,1.6vw,20px)/1.2 var(--display)}
+.bracelet-order{display:inline-flex;align-items:center;gap:11px;white-space:nowrap;color:#e1cba3;font-size:9px;border-bottom:1px solid rgba(225,203,163,.55);padding:0 0 5px}
+.bracelet-order:hover{color:#fff}
+@media(max-width:650px){.bracelets{padding-top:68px;padding-bottom:68px}.bracelet-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 11px}.bracelet-image{aspect-ratio:3/4}.bracelet-image-placeholder>span{font-size:64px}.bracelet-info{align-items:flex-start;flex-direction:column;padding:12px 0 10px;gap:10px}.bracelet-info h3{font-size:14px}.bracelet-order{font-size:8px}}.bracelet-price{margin:7px 0 0;color:#e1cba3;font:700 18px/1 var(--display);letter-spacing:-.03em}
+.bracelet-price span{font:500 7px var(--font);letter-spacing:.14em;color:#a9a69d}.bracelet-offer-badge{position:absolute;z-index:2;right:12px;top:12px;padding:8px 10px;background:#caa969;color:#171612;font-size:8px;font-weight:800;letter-spacing:.15em}
+.bracelet-price{display:flex;align-items:baseline;gap:7px}
+.bracelet-price del{color:#99948a;font:500 11px var(--font)}
+.bracelet-price strong{font:800 20px/1 var(--display);letter-spacing:-.04em;color:#f0d29a}
