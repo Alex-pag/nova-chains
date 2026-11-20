@@ -254,3 +254,179 @@
 .bracelet-price{display:flex;align-items:baseline;gap:7px}
 .bracelet-price del{color:#99948a;font:500 11px var(--font)}
 .bracelet-price strong{font:800 20px/1 var(--display);letter-spacing:-.04em;color:#f0d29a}
+
+/* ==========================================================================
+   Animaciones y acabados.
+   Todo se anima con transform/opacity (lo resuelve la GPU, sin recalcular el
+   diseño), las animaciones continuas se pausan fuera de pantalla (.is-paused)
+   y se respetan las preferencias de movimiento reducido.
+   ========================================================================== */
+:root{--ease:cubic-bezier(.2,.7,.2,1)}
+.is-paused,.is-paused *,.is-paused *::before,.is-paused *::after{animation-play-state:paused!important}
+
+@keyframes rise-in{from{opacity:0;transform:translateY(16px)}}
+@keyframes line-up{from{transform:translateY(112%)}}
+@keyframes line-grow{from{transform:scaleX(0)}}
+@keyframes fade-in{from{opacity:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes sheen{0%{transform:translateX(-130%)}35%,100%{transform:translateX(130%)}}
+@keyframes price-pop{from{opacity:0;transform:scale(.82)}60%{transform:scale(1.05)}}
+@keyframes nudge-down{50%{transform:translateY(5px)}}
+@keyframes marquee{to{transform:translateX(-25%)}}
+@keyframes ring{from{transform:scale(1);opacity:.7}to{transform:scale(1.9);opacity:0}}
+@keyframes viewer-in{from{opacity:0;transform:scale(.965) translateY(10px)}}
+@keyframes faq-open{from{opacity:0;transform:translateY(-6px)}}
+@keyframes travel{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+@keyframes ken-burns{from{scale:1.14}to{scale:1}}
+@keyframes drift{from{transform:translateX(-5%)}to{transform:translateX(5%)}}
+
+/* Encabezado: sombra al desplazarse, barra de progreso y subrayado de enlaces */
+.site-header{transition:box-shadow .3s,border-color .3s}
+.site-header.is-scrolled{box-shadow:0 10px 30px rgba(0,0,0,.28);border-bottom-color:rgba(198,168,120,.2)}
+.scroll-progress{position:absolute;left:0;right:0;bottom:-1px;height:2px;background:linear-gradient(90deg,#c6a878,#ead8b8);transform:scaleX(0);transform-origin:left;pointer-events:none}
+@media(min-width:651px){
+  .nav>a:not(.nav-cta){position:relative;padding:6px 0}
+  .nav>a:not(.nav-cta)::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--accent);scale:0 1;transform-origin:left;transition:scale .3s var(--ease)}
+  .nav>a:not(.nav-cta):hover::after,.nav>a.is-active::after{scale:1 1}
+  .nav>a.is-active{color:#fff}
+}
+
+/* Entrada del hero: solo CSS, arranca con el primer pintado sin esperar al JS */
+.hero{--step:80ms;--dur:.7s}
+.hero h1 .line{display:block;overflow:hidden;padding-bottom:.1em;margin-bottom:-.1em}
+.hero h1 .line,.hero h1 .line>span{color:inherit}
+.hero h1 .line>span{display:block;animation:line-up calc(var(--dur) + .1s) var(--ease) both;animation-delay:calc(var(--i)*var(--step))}
+.hero h1 .line-accent>span{color:#c6a878}
+.hero-copy>.eyebrow{--i:0}.hero-offer{--i:1}.hero h1 .line:nth-child(1)>span{--i:2}.hero h1 .line:nth-child(2)>span{--i:3}.hero h1 .line:nth-child(3)>span{--i:4}.hero-subtitle{--i:5}.hero-actions{--i:6}.hero-note{--i:7}
+.hero-copy>.eyebrow,.hero-offer,.hero-subtitle,.hero-actions,.hero-note{animation:rise-in var(--dur) var(--ease) both;animation-delay:calc(var(--i)*var(--step))}
+.hero .hero-copy .eyebrow-line{transform-origin:left;animation:line-grow .8s .15s var(--ease) both}
+.hero-bottom{animation:fade-in .8s .5s both}
+.hero-bottom a{animation:nudge-down 2.2s ease-in-out 1.4s infinite}
+.offer-now{display:inline-block;transform-origin:left bottom;animation:price-pop .6s calc(var(--step)*4) var(--ease) both}
+.offer-old{position:relative;text-decoration:none}
+.offer-old::after{content:"";position:absolute;left:-3px;right:-3px;top:52%;height:2px;background:#c6a878;transform-origin:left;animation:line-grow .45s calc(var(--step)*8) var(--ease) both}
+.offer-discount,.bracelet-offer-badge{overflow:hidden}
+.offer-discount{position:relative}
+.offer-discount::after,.bracelet-offer-badge::after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.6) 50%,transparent 70%);transform:translateX(-130%);animation:sheen 3.8s 1.2s ease-in-out infinite;pointer-events:none}
+.note-dot{position:relative}
+.note-dot::after{content:"";position:absolute;inset:0;border-radius:50%;background:#c6a878;animation:ring 2.4s ease-out infinite}
+
+/* Arte del hero: órbitas que giran con un punto de luz y paralaje con el cursor */
+.orbit::after{content:"";position:absolute;top:-3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#d9c198;box-shadow:0 0 10px rgba(217,193,152,.85)}
+.orbit-one{animation:spin 40s linear infinite}
+.orbit-two{animation:spin 28s linear infinite reverse}
+.orbit-three{animation:spin 19s linear infinite}
+.hero-wordmark,.hero-star,.art-caption{transition:translate .5s var(--ease)}
+.hero-wordmark{translate:calc(var(--px,0)*-18px) calc(var(--py,0)*-12px)}
+.hero-star{translate:calc(var(--px,0)*28px) calc(var(--py,0)*20px)}
+.art-caption{translate:calc(var(--px,0)*10px) calc(var(--py,0)*8px)}
+
+/* Cinta en movimiento entre el hero y la colección */
+.marquee{overflow:hidden;padding:15px 0;background:#11110f;border-top:1px solid rgba(198,168,120,.22);border-bottom:1px solid rgba(198,168,120,.22)}
+.marquee-track{display:flex;width:max-content;animation:marquee 26s linear infinite}
+.marquee-group{display:flex;flex-shrink:0;align-items:center;gap:30px;padding-right:30px;color:#b9b5aa;font-size:10px;font-weight:600;letter-spacing:.2em;white-space:nowrap}
+.marquee-group i{color:var(--accent);font-style:normal;font-size:12px}
+
+/* Botones: brillo al pasar el cursor, flecha que avanza y respuesta al tocar */
+.button{position:relative;overflow:hidden}
+.button>span:last-child,.text-link span,.bracelet-order span,.nav-cta span{display:inline-block;transition:translate .25s var(--ease)}
+.button:active,.chain-select:active{scale:.97}
+.chain-select{transition:background .2s,color .2s,border .2s,scale .15s}
+@media(hover:hover){
+  .button::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.3) 50%,transparent 65%);translate:-130% 0;transition:translate .7s ease;pointer-events:none}
+  .button:hover::after{translate:130% 0}
+  .button:hover>span:last-child,.text-link:hover span,.bracelet-order:hover span,.nav-cta:hover span{translate:3px 0}
+  .faq summary{transition:color .2s,padding-left .25s var(--ease)}
+  .faq summary:hover{padding-left:8px}
+  .service-card:hover .service-card-top svg{color:#8e7046;scale:1.08}
+}
+.service-card-top svg{transition:color .25s,scale .25s var(--ease)}
+
+/* Aparición al desplazarse (app.js añade y retira estas clases) */
+.will-reveal{opacity:0;translate:0 22px;transition:opacity .7s ease,translate .7s var(--ease)}
+.will-reveal .eyebrow-line{scale:0 1;transform-origin:left;transition:scale .7s .25s var(--ease)}
+.will-reveal.is-revealed .eyebrow-line{scale:1 1}
+.will-reveal .gallery-trigger img,.will-reveal .bracelet-image img,.will-reveal .customer-photo-frame img{scale:1.12;transition:scale .95s var(--ease)}
+.will-reveal.is-revealed .gallery-trigger img,.will-reveal.is-revealed .bracelet-image img,.will-reveal.is-revealed .customer-photo-frame img{scale:1}
+.service-card.will-reveal svg>*{stroke-dasharray:120;stroke-dashoffset:120}
+.service-card.will-reveal.is-revealed svg>*{stroke-dashoffset:0;transition:stroke-dashoffset 1s ease .2s}
+
+/* Selección de cadenas: marca de verificación, progreso del regalo y barra fija */
+.chain-card-photo::after{content:"✓";position:absolute;z-index:3;right:10px;top:10px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#c6a878;color:#171612;font-size:14px;font-weight:700;scale:0;opacity:0;transition:scale .35s cubic-bezier(.3,1.6,.5,1),opacity .2s;pointer-events:none}
+.chain-card.is-selected .chain-card-photo::after{scale:1;opacity:1}
+.selection-summary strong,.selection-summary p{transform-origin:left center}
+.gift-progress{width:min(260px,100%);height:3px;margin-top:7px;background:#d4d1c8;overflow:hidden}
+.gift-progress span{display:block;height:100%;background:#8c795b;transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease),background .3s}
+.gift-progress.is-complete span{background:linear-gradient(90deg,#a88655,#d9bd8e)}
+.selection-bar{position:fixed;z-index:6;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));width:min(540px,calc(100% - 24px));display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 10px 10px 17px;border:1px solid rgba(198,168,120,.55);background:rgba(22,22,19,.97);color:#f1eee7;box-shadow:0 14px 40px rgba(0,0,0,.38);translate:-50% 140%;opacity:0;visibility:hidden;transition:translate .45s cubic-bezier(.2,.8,.2,1),opacity .3s,visibility 0s .45s}
+.selection-bar.is-visible{translate:-50% 0;opacity:1;visibility:visible;transition-delay:0s}
+.selection-bar-text{display:grid;gap:3px;min-width:0}
+.selection-bar-text strong{font:700 14px var(--display);letter-spacing:-.01em}
+.selection-bar-text span{color:#c8b491;font-size:10px;line-height:1.4}
+.selection-bar .button{flex-shrink:0;min-height:42px}
+
+/* Contacto flotante: anillo que late mientras está visible */
+.floating-contact-icon{position:relative}
+.floating-contact.is-visible .floating-contact-icon::after{content:"";position:absolute;inset:0;border-radius:50%;border:1px solid #c6a878;animation:ring 2.6s ease-out infinite}
+
+/* Preguntas frecuentes: apertura suave */
+.faq details[open]>p{animation:faq-open .35s var(--ease)}
+@supports(interpolate-size:allow-keywords){
+  :root{interpolate-size:allow-keywords}
+  .faq details::details-content{block-size:0;overflow:clip;transition:block-size .35s var(--ease),content-visibility .35s allow-discrete}
+  .faq details[open]::details-content{block-size:auto}
+}
+
+/* Visor de fotos */
+.gallery-viewer[open]{animation:viewer-in .32s var(--ease)}
+.gallery-viewer[open]::backdrop{animation:fade-in .3s ease}
+.viewer-thumbnails button{transition:opacity .2s,border-color .2s,translate .2s var(--ease)}
+.viewer-thumbnails button[aria-current=true]{translate:0 -3px}
+
+/* Detalles decorativos */
+.manifesto-mark span,.closing-star,.developer-side-mark{display:inline-block;animation:spin 36s linear infinite}
+.closing-star{display:block;animation-duration:60s}
+.developer-side-line{position:relative;overflow:hidden}
+.developer-side-line::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,#8e7046,transparent);animation:travel 2.8s ease-in-out infinite}
+
+/* Efectos ligados al desplazamiento (solo navegadores compatibles; corren en el compositor) */
+@media(prefers-reduced-motion:no-preference){@supports(animation-timeline:view()){
+  .gold-cross-image img,.perfume-image img{animation:ken-burns linear both;animation-timeline:view()}
+  .manifesto-mark{animation:drift linear both;animation-timeline:view()}
+}}
+
+/* Teléfonos: entrada más corta y menú animado */
+@media(max-width:650px){
+  .hero{--step:45ms;--dur:.5s}
+  .will-reveal{translate:0 14px;transition-duration:.5s}
+  .marquee{padding:12px 0}
+  .marquee-group{gap:22px;padding-right:22px;font-size:9px}
+  .marquee-track{animation-duration:20s}
+  .nav{display:flex;visibility:hidden;opacity:0;translate:0 -10px;transition:opacity .25s ease,translate .3s var(--ease),visibility 0s .3s}
+  .nav.is-open{visibility:visible;opacity:1;translate:0 0;transition-delay:0s}
+  .nav.is-open>a{animation:rise-in .35s var(--ease) both}
+  .nav.is-open>a:nth-child(2){animation-delay:30ms}.nav.is-open>a:nth-child(3){animation-delay:60ms}.nav.is-open>a:nth-child(4){animation-delay:90ms}.nav.is-open>a:nth-child(5){animation-delay:120ms}.nav.is-open>a:nth-child(6){animation-delay:150ms}.nav.is-open>a:nth-child(7){animation-delay:180ms}.nav.is-open>a:nth-child(8){animation-delay:210ms}
+  .nav>a.is-active{color:#e4d3b4}
+  .chain-card-photo::after{right:8px;top:8px;width:24px;height:24px;font-size:12px}
+  .selection-bar{padding:8px 8px 8px 13px;gap:10px}
+  .selection-bar-text strong{font-size:13px}
+  .selection-bar-text span{font-size:9px}
+}
+
+/* Piezas agotadas: sello centrado, foto atenuada y compra desactivada. */
+.sold-out-stamp{position:absolute;inset:0;z-index:4;display:grid;place-content:center;justify-items:center;gap:9px;pointer-events:none;background:radial-gradient(ellipse at center,rgba(8,8,7,.25),rgba(8,8,7,.62))}
+.sold-out-stamp strong{position:relative;padding:12px 20px 12px 26px;border:1px solid rgba(226,200,145,.8);outline:1px solid rgba(226,200,145,.28);outline-offset:5px;background:rgba(12,12,11,.7);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);color:#efdcb4;font:600 clamp(12px,1.4vw,16px)/1 var(--display);letter-spacing:.34em;transform:rotate(-4deg)}
+.sold-out-stamp small{margin-top:6px;color:rgba(226,215,192,.72);font-size:7px;letter-spacing:.26em;transform:rotate(-4deg)}
+.is-sold-out img{filter:grayscale(.6) brightness(.62) contrast(.95)}
+.chain-card.is-sold-out:hover,.chain-card.is-sold-out .gallery-trigger:hover img,.bracelet-card.is-sold-out:hover .bracelet-image img,.gold-cross-offer.is-sold-out:hover .gold-cross-image img{transform:none}
+.chain-card.is-sold-out:hover{border-color:#d8d6cf;box-shadow:none}
+.chain-card.is-sold-out .chain-card-info{opacity:.6}
+.chain-card.is-sold-out .chain-card-price strong,.bracelet-card.is-sold-out .bracelet-price strong,.gold-cross-offer.is-sold-out .gold-cross-price strong{text-decoration:line-through;text-decoration-thickness:2px;opacity:.55}
+.chain-select:disabled,.chain-select:disabled:hover{border:1px dashed #bdb8ab;background:transparent;color:#8a806e;letter-spacing:.2em;text-transform:uppercase;cursor:not-allowed}
+.bracelet-card.is-sold-out .bracelet-kicker{color:#8f897d}
+.bracelet-card.is-sold-out h3{color:#bdb8ad}
+.sold-out-label{white-space:nowrap;padding:0 0 5px;border-bottom:1px dashed rgba(201,193,177,.4);color:#8f897d;font-size:9px;letter-spacing:.2em;text-transform:uppercase}
+.gold-cross-offer.is-sold-out .gold-cross-copy h3{color:#bdb8ad}
+.gold-cross-offer.is-sold-out .gold-cross-order,.gold-cross-offer.is-sold-out .gold-cross-order:hover{justify-content:center;background:transparent;border:1px dashed rgba(208,183,125,.5);color:#d0b77d;letter-spacing:.18em;text-transform:uppercase;cursor:not-allowed}
+.gold-cross-image>.sold-out-stamp{inset:0;left:0;top:0;padding:0;background:radial-gradient(ellipse at center,rgba(8,8,7,.25),rgba(8,8,7,.62));letter-spacing:normal}
+.gold-cross-offer.is-sold-out .gold-cross-image .sold-out-stamp strong{font-size:clamp(16px,2vw,22px);padding:15px 24px 15px 32px}

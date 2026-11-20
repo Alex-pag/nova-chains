@@ -17,7 +17,7 @@
   <title>NOVA CHAINS — Tu estilo. Tu cadena. Tu esencia.</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400..700&family=Manrope:wght@300..800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script src="config.js" defer></script>
   <script src="app.js" defer></script>
@@ -31,6 +31,7 @@
       <a href="#inicio">Inicio</a><a href="#coleccion">Colección</a><a href="#pulseras">Pulseras</a><a href="#perfumes">Perfumes</a><a href="#clientes">Clientes</a><a href="#nosotros">Sobre nosotros</a><a href="#faq">Preguntas frecuentes</a>
       <a class="nav-cta js-whatsapp" data-message="general" href="#">Pedir ahora <span aria-hidden="true">↗</span></a>
     </nav>
+    <span class="scroll-progress" aria-hidden="true"></span>
   </header>
   <main id="contenido">
     <section class="hero" aria-labelledby="hero-title">
@@ -40,7 +41,7 @@
           <div class="offer-topline"><span><span class="offer-spark" aria-hidden="true">✳</span> OFERTA ESPECIAL</span><strong class="offer-discount">66.4% DE DESCUENTO</strong></div>
           <div class="offer-prices"><del class="offer-old">$149 <small>MXN</small></del><span class="offer-now">$50</span><span class="offer-unit">MXN<br>cada cadena</span></div>
         </div>
-        <h1 id="hero-title">Tu estilo.<br>Tu cadena.<br><span>Tu esencia.</span></h1>
+        <h1 id="hero-title"><span class="line"><span>Tu estilo.</span></span> <span class="line"><span>Tu cadena.</span></span> <span class="line line-accent"><span>Tu esencia.</span></span></h1>
         <p class="hero-subtitle">Accesorios que completan tu estilo sin pasar desapercibidos.</p>
         <div class="hero-actions"><a class="button button-light" href="#coleccion">Ver colección <span aria-hidden="true">↘</span></a><a class="button button-outline js-whatsapp" data-message="general" href="#"><span class="wa-icon" aria-hidden="true">◉</span> Comprar por WhatsApp</a></div>
         <div class="hero-note"><span class="note-dot"></span> Una buena primera impresión. Una cadena a la vez.</div>
@@ -49,18 +50,25 @@
       <div class="hero-bottom"><span>HECHO PARA SER TUYO</span><a href="#coleccion" aria-label="Desplazarse a la colección">↓</a><span>MX · NOVA</span></div>
     </section>
 
+    <div class="marquee" aria-hidden="true"><div class="marquee-track">
+      <div class="marquee-group"><span>TU ESTILO</span><i>✳</i><span>TU CADENA</span><i>✳</i><span>TU ESENCIA</span><i>✳</i><span>$50 MXN CADA CADENA</span><i>✳</i><span>REGALO AL COMPRAR 3</span><i>✳</i><span>PEDIDOS POR WHATSAPP</span><i>✳</i></div>
+      <div class="marquee-group"><span>TU ESTILO</span><i>✳</i><span>TU CADENA</span><i>✳</i><span>TU ESENCIA</span><i>✳</i><span>$50 MXN CADA CADENA</span><i>✳</i><span>REGALO AL COMPRAR 3</span><i>✳</i><span>PEDIDOS POR WHATSAPP</span><i>✳</i></div>
+      <div class="marquee-group"><span>TU ESTILO</span><i>✳</i><span>TU CADENA</span><i>✳</i><span>TU ESENCIA</span><i>✳</i><span>$50 MXN CADA CADENA</span><i>✳</i><span>REGALO AL COMPRAR 3</span><i>✳</i><span>PEDIDOS POR WHATSAPP</span><i>✳</i></div>
+      <div class="marquee-group"><span>TU ESTILO</span><i>✳</i><span>TU CADENA</span><i>✳</i><span>TU ESENCIA</span><i>✳</i><span>$50 MXN CADA CADENA</span><i>✳</i><span>REGALO AL COMPRAR 3</span><i>✳</i><span>PEDIDOS POR WHATSAPP</span><i>✳</i></div>
+    </div></div>
+
     <section class="collection section-pad" id="coleccion">
       <div class="section-heading"><div><p class="eyebrow"><span class="eyebrow-line"></span> SELECCIÓN NOVA</p><h2>Elige tu cadena<span class="period">.</span></h2></div><p class="section-intro">Toca “Agregar a mi selección” en tus favoritas.<br><span>Antes $149 MXN · Hoy $50 MXN · Ahorras 66.4%.</span></p></div>
       <aside class="gold-cross-offer" id="gold-cross-offer" aria-labelledby="gold-cross-title">
-        <div class="gold-cross-image"><img id="gold-cross-image" alt="" loading="lazy"><span>OFERTA ESPECIAL · NOVA</span></div>
+        <div class="gold-cross-image"><img id="gold-cross-image" alt="" loading="lazy" decoding="async" width="1024" height="1536"><span>OFERTA ESPECIAL · NOVA</span></div>
         <div class="gold-cross-copy"><p class="eyebrow"><span class="eyebrow-line"></span> UN TOQUE DORADO</p><p class="gold-cross-label">CADENA + DIJE INCLUIDO</p><h3 id="gold-cross-title">Una cruz que<br>completa tu estilo.</h3><p class="gold-cross-description">Cadena dorada con dije de cruz incluido. Una pieza especial para llevar contigo.</p><p class="gold-cross-price"><strong>$75</strong><span>MXN</span></p><a class="button gold-cross-order" id="gold-cross-order" href="#" target="_blank" rel="noopener noreferrer">Pedir esta oferta por WhatsApp <span aria-hidden="true">↗</span></a></div>
       </aside>      <div class="chain-grid" id="chain-grid" aria-label="Elige entre nueve cadenas NOVA CHAINS"></div>
       <aside class="gift-promo" aria-labelledby="gift-title">
         <div class="gift-copy"><p class="eyebrow"><span class="eyebrow-line"></span> UN DETALLE EXTRA PARA TI</p><h3 id="gift-title">AL COMPRAR 3<br>TE REGALAMOS:</h3><p>Un dije de cruz para una de tus cadenas.</p><span class="gift-tag">TU REGALO NOVA</span></div>
-        <img id="gift-image" src="public/images/regalo-cruz.jpeg" alt="Dije plateado de cruz, el regalo al comprar tres cadenas" loading="lazy">
+        <img id="gift-image" src="public/images/regalo-cruz.jpeg" alt="Dije plateado de cruz, el regalo al comprar tres cadenas" loading="lazy" decoding="async" width="1169" height="1280">
       </aside>
       <div class="selection-panel" aria-live="polite">
-        <div class="selection-summary"><span class="selection-label">TU SELECCIÓN</span><strong id="selection-count">0 cadenas seleccionadas</strong><p id="selection-total">Total: $0 MXN</p><p id="selection-message">Elige 3 cadenas para llevarte el dije de cruz de regalo.</p></div>
+        <div class="selection-summary"><span class="selection-label">TU SELECCIÓN</span><strong id="selection-count">0 cadenas seleccionadas</strong><p id="selection-total">Total: $0 MXN</p><p id="selection-message">Elige 3 cadenas para llevarte el dije de cruz de regalo.</p><div class="gift-progress" aria-hidden="true"><span id="gift-progress"></span></div></div>
         <a class="button button-dark is-disabled" id="send-selection" aria-disabled="true" href="#">Continuar por WhatsApp <span aria-hidden="true">↗</span></a>
       </div>
     </section>
@@ -107,6 +115,7 @@
       <div class="developer-signature"><span>Desarrollado por mí, desde la idea hasta el código.</span><span class="signature-mark" aria-hidden="true">NC&nbsp; / &nbsp;DIGITAL</span></div>
     </section>
   </main>
+  <div class="selection-bar" id="selection-bar" inert><div class="selection-bar-text"><strong id="selection-bar-count"></strong><span id="selection-bar-hint"></span></div><a class="button button-light" id="selection-bar-send" href="#" target="_blank" rel="noopener noreferrer">Pedir ahora <span aria-hidden="true">↗</span></a></div>
   <a class="floating-contact js-whatsapp" data-message="general" href="#" aria-label="Escríbenos por WhatsApp"><span class="floating-contact-icon" aria-hidden="true">↗</span><span>¿Te ayudamos a elegir?</span></a>
   <dialog class="gallery-viewer" id="gallery-viewer" aria-label="Galería de la colección">
     <button class="viewer-close" type="button" aria-label="Cerrar galería">×</button>

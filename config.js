@@ -1,4 +1,5 @@
 // Configuración central: actualiza aquí el contacto y las fotos de la colección.
+// Para marcar una pieza como agotada agrega `soldOut: true`; bórralo cuando vuelva a estar disponible.
 window.NOVA_CONFIG = {
   brand: 'NOVA CHAINS',
   whatsappNumber: '529983072856',
@@ -11,7 +12,7 @@ window.NOVA_CONFIG = {
     { image: 'public/images/cadena-03.jpeg', name: 'Serpiente', alt: 'Cadena plateada lisa tipo serpiente sobre fondo negro' },
     { image: 'public/images/cadena-04.jpeg', name: 'Torzal', alt: 'Cadena plateada de eslabones retorcidos tipo torzal sobre fondo negro' },
     { image: 'public/images/cadena-05.jpeg', name: 'Trenzada', alt: 'Cadena plateada trenzada sobre fondo negro' },
-    { image: 'public/images/cadena-06.jpeg', name: 'Placas', alt: 'Cadena plateada formada por placas alargadas sobre fondo negro' },
+    { image: 'public/images/cadena-06.jpeg', name: 'Placas', soldOut: true, alt: 'Cadena plateada formada por placas alargadas sobre fondo negro' },
     { image: 'public/images/cadena-07.jpeg', name: 'Delicada', alt: 'Cadena plateada delgada de eslabones pequeños sobre fondo negro' },
     { image: 'public/images/cadena-08.jpeg', name: 'Cubana', alt: 'Cadena plateada de eslabones estilo cubano sobre fondo negro' },
     { image: 'public/images/cadena-09.jpeg', name: 'Veneciana', alt: 'Cadena plateada de eslabones cuadrados estilo veneciano sobre fondo negro' }
@@ -20,12 +21,12 @@ window.NOVA_CONFIG = {
     { image: 'public/images/pulseras/pulsera-01.jpeg', name: 'Torzal', price: 30, alt: 'Pulsera plateada de cadena tipo torzal sobre fondo negro' },
     { image: 'public/images/pulseras/pulsera-02.jpeg', name: 'Cubana', price: 30, alt: 'Pulsera plateada de eslabones planos estilo cubano sobre fondo negro' },
     { image: 'public/images/pulseras/pulsera-03.jpeg', name: 'Eslabones clásicos', price: 30, alt: 'Pulsera plateada de eslabones redondos sobre fondo negro' },
-    { image: 'public/images/pulseras/pulsera-04.jpeg', name: 'Brillante dorada', price: 30, referencePrice: 50, alt: 'Pulsera dorada con piedras brillantes sobre fondo negro' }
+    { image: 'public/images/pulseras/pulsera-04.jpeg', name: 'Brillante dorada', price: 30, referencePrice: 50, soldOut: true, alt: 'Pulsera dorada con piedras brillantes sobre fondo negro' }
   ],
   perfumes: [
-    { image: 'public/images/perfume-lebeau.png', name: 'Le Beau', description: 'Perfume Le Beau en formato decant de 5 ml: una dosis práctica de tu nueva esencia favorita.', price: 160, alt: 'Atomizador turquesa LeBeau frente a un frasco de perfume' }
+    { image: 'public/images/perfume-lebeau.jpg', name: 'Le Beau', description: 'Perfume Le Beau en formato decant de 5 ml: una dosis práctica de tu nueva esencia favorita.', price: 160, alt: 'Atomizador turquesa LeBeau frente a un frasco de perfume' }
   ],
-  goldCrossOffer: { image: 'public/images/cadena-dorada-cruz.png', name: 'Cadena dorada con dije de cruz', price: 75, alt: 'Cadena dorada con dije de crucifijo INRI sobre fondo negro' },
+  goldCrossOffer: { image: 'public/images/cadena-dorada-cruz.jpg', name: 'Cadena dorada con dije de cruz', price: 75, soldOut: true, alt: 'Cadena dorada con dije de crucifijo INRI sobre fondo negro' },
   giftImage: 'public/images/regalo-cruz.jpeg',
   customerPhotos: [
     { image: 'public/images/clientes/cliente-01.jpeg', alt: 'Cliente de NOVA CHAINS usando una cadena plateada', caption: 'Una cadena, tu propio estilo.' },
